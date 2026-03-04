@@ -1,5 +1,6 @@
 import generateUID from "./UIDGenerator.js";
 import StorageManager from "./dataStorage.js";
+import CalendarEvent from "./classCalendarEvent.js";
 
 const eventPopupContainer = document.getElementById("eventPopupContainer");
 const eventTitleInput = document.getElementById("eventTitle");
@@ -37,19 +38,20 @@ function initializeEventManager() {
 function submitEvent(eventForm) {
   // Extract form data and create event object
   const data = new FormData(eventForm);
-  const event = Object.fromEntries(data);
+  const eventProps = Object.fromEntries(data);
   // Validate form input data
-  if (!validateEventSubmission(event)) {
+  if (!validateEventSubmission(eventProps)) {
     eventForm.reportValidity();
     return;
   }
   // Generate and assign UID, save event, and hide the event creation form
   const id = generateUID();
-  event.UID = id;
-  StorageManager.saveEvent(event);
+  eventProps.UID = id;
+  const newEvent = new CalendarEvent(eventProps);
+  StorageManager.saveEvent(newEvent);
   hideEventCreator();
   console.log("Event saved (UID: " + id + ")");
-  console.log(event);
+  console.log(newEvent);
 }
 
 /**
