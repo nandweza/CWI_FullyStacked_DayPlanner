@@ -1,0 +1,19 @@
+.menuButton {
+  position: absolute;
+  top: .25rem;
+  right: 1%;
+
+  background-image: url("../assets/icons/menu.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  height: 2rem;
+  width: 2rem;
+
+  border: none;
+}
+
+.hidden {
+  /* display: none; */
+}

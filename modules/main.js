@@ -1,7 +1,9 @@
-import { renderCalendarView } from "./calendar/calendar.js";
+import runTests from "../tests/runTests.js";
 import StorageManager from "./dataStorage.js";
-import { initializeEventManager } from "./eventManager.js";
 import appSettings from "./settings.js";
+import { renderCalendarView } from "./calendar/calendar.js";
+import { initializeEventManager } from "./eventManager.js";
+import createMenu from "./settingsMenu.js";
 
 // Load user settings from localStorage when the application starts
 appSettings.loadSettings();
@@ -24,3 +26,7 @@ initializeEventManager();
         });
     }
 }
+
+createMenu();
+// runTests();
+
