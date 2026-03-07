@@ -111,15 +111,11 @@ const appSettings = {
         this.firstDayOfWeek = settings.firstDayOfWeek;
         this.displayHolidays = settings.displayHolidays;
       } catch (error) {
-        console.error("Error parsing settings from localStorage:", error);
+        console.warn("Error parsing settings from localStorage:", error);
       }
     } else {
       console.log("No saved settings found in localStorage.");
     }
-  },
-
-  runTestSuite() {
-    testSuite();
   },
 };
 
