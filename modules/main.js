@@ -3,10 +3,11 @@ import StorageManager from "./dataStorage.js";
 import appSettings from "./settings.js";
 import { renderCalendarView } from "./calendar/calendar.js";
 import { initializeEventManager } from "./eventManager.js";
-import createMenu from "./settingsMenu.js";
+import createSettingsMenu from "./settingsMenu.js";
 
 // Load user settings from localStorage when the application starts
 appSettings.loadSettings();
+createSettingsMenu();
 
 // Load all saved calendar events from localStorage when the application starts
 const allEvents = StorageManager.loadAllEvents();
@@ -15,18 +16,16 @@ const allEvents = StorageManager.loadAllEvents();
 initializeEventManager();
 
 {
-    const viewDate = new Date();
-    viewDate.setHours(0, 0, 0, 0);
+  const viewDate = new Date();
+  viewDate.setHours(0, 0, 0, 0);
 
-    renderCalendarView(allEvents, viewDate);
-    const slotDurationSelect = document.getElementById('slotDurationSelect');
-    if (slotDurationSelect) {
-        slotDurationSelect.addEventListener("change", () => {
-            renderCalendarView(allEvents, viewDate);
-        });
-    }
+  renderCalendarView(allEvents, viewDate);
+  const slotDurationSelect = document.getElementById("slotDurationSelect");
+  if (slotDurationSelect) {
+    slotDurationSelect.addEventListener("change", () => {
+      renderCalendarView(allEvents, viewDate);
+    });
+  }
 }
 
-createMenu();
 // runTests();
-
