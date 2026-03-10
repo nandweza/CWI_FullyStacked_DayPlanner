@@ -1,3 +1,5 @@
+import localStorageMock from "./mockStorage.js";
+
 import StorageManager from "../modules/dataStorage.js";
 import CalendarEvent from "../modules/classCalendarEvent.js";
 
@@ -5,36 +7,8 @@ function storageTests() {
   let passed = 0;
   let failed = 0;
 
-  // ─── SETUP: Mock localStorage ─────────────────────────────────────────────────
-  // Replaces the real localStorage with a simple in-memory version so tests
-  // don't pollute real storage and can run in any environment (e.g. Node.js)
-  const mockStorage = {};
-  const localStorageMock = {
-    getItem: (key) => mockStorage[key] ?? null,
-    setItem: (key, value) => {
-      mockStorage[key] = value;
-    },
-    removeItem: (key) => {
-      delete mockStorage[key];
-    },
-    key: (i) => Object.keys(mockStorage)[i] ?? null,
-    get length() {
-      return Object.keys(mockStorage).length;
-    },
-    clear: () => {
-      Object.keys(mockStorage).forEach((k) => delete mockStorage[k]);
-    },
-  };
-
-  // Save original storage for restoring after the tests
-  const originalLocalStorage = globalThis.localStorage;
-
-  // Temporarily replace official localStorage with mock version for testing
-  Object.defineProperty(globalThis, "localStorage", {
-    value: localStorageMock,
-    writable: true,
-    configurable: true,
-  });
+  // Replace localStorage with mock version
+  localStorageMock.initialize();
 
   // ─── SETUP: Mock confirm() ────────────────────────────────────────────────────
   // confirm() is replaced with a controllable fake so tests can simulate
@@ -353,11 +327,7 @@ function storageTests() {
   // ─── SUMMARY ──────────────────────────────────────────────────────────────────
 
   // Restore original globals
-  Object.defineProperty(globalThis, "localStorage", {
-    value: originalLocalStorage,
-    writable: true,
-    configurable: true,
-  });
+  localStorageMock.restore();
   globalThis.confirm = originalConfirm;
 
   console.log(

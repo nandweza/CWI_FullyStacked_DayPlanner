@@ -18,8 +18,28 @@
     overflow-x: hidden;
     grid-column: span 1;
     border: none;
-  
-    @media (min-width: 768px) {
+  }
+
+  #calendarViewArea .calendarDayContent,
+  #calendarViewArea .calendarWeekContent,
+  #calendarViewArea .calendarMonthContent {
+    display: none;
+  }
+
+  #calendarViewArea[data-calendar-view="day"] .calendarDayContent {
+    display: flex;
+  }
+
+  #calendarViewArea[data-calendar-view="week"] .calendarWeekContent {
+    display: flex;
+  }
+
+  #calendarViewArea[data-calendar-view="month"] .calendarMonthContent {
+    display: flex;
+  }
+
+  @media (min-width: 768px) {
+    #calendarViewArea {
       grid-column: span 6;
     }
   }
@@ -221,7 +241,7 @@
     right: 0.5rem;
     border: none;
     width: fit-content;
-    z-index: 1000;
+    z-index: 10;
   
     @media (min-width: 768px) {
       right: 1.25rem;

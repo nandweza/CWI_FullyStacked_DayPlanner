@@ -1,0 +1,74 @@
+.settingsMenuButton {
+  position: absolute;
+  top: 0.25rem;
+  right: 1%;
+  z-index: 21;
+
+  background-image: url("../assets/icons/menu.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  height: 2rem;
+  width: 2rem;
+
+  border: none;
+}
+
+.settingsMenuClose {
+  background-image: url("../assets/icons/x.svg");
+}
+
+.hidden {
+  display: none !important;
+}
+
+.settingsMenuContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 20;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  width: 100%;
+  height: 100%;
+  padding: 2.25rem 1% 0 0;
+
+  border: none;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+}
+
+.menuItemContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+
+  padding: 0.25rem;
+  width: 16rem;
+  height: 3rem;
+
+  background-color: white;
+  border: solid 1px black;
+  border-radius: .5rem 0 0 .25rem;
+
+  /* Keeps borders from overlapping and doubling in thickness */
+  margin-bottom: -1px;
+}
+
+.menuItemName {
+  font-size: 0.9rem;
+}
+
+.menuItemIcon {
+}
+
+.menuItemSetting {
+  margin-left: auto;
+}
