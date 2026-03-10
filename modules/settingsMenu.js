@@ -9,6 +9,7 @@ const menuItems = [
     name: "Light Mode",
     icon: "../assets/icons/moon.svg",
     setting: function () {
+      console.log("Light mode: " + appSettings.lightMode);
       return appSettings.lightMode;
     },
     click: appSettings.toggleLightMode,
@@ -44,7 +45,7 @@ const menuItems = [
     setting: function () {
       return appSettings.colorTheme;
     },
-    click: function () {},
+    click: function () {}, // TODO: add drop-down color selection
   },
 ];
 
@@ -79,6 +80,7 @@ function createMenuContainer() {
   return menuContainer;
 }
 
+// This creates each line in the menu based on the values in menuItems
 function createMenuItem(props) {
   const container = document.createElement("div");
   container.classList.add("menuItemContainer");
@@ -120,10 +122,11 @@ function closeMenu() {
   menuContainer.classList.toggle("hidden");
   console.log("Menu Closed");
   menuIsOpen = false;
+  appSettings.saveSettings();
 }
 
-const menuButton = createMenuButton();
-const menuContainer = createMenuContainer();
+let menuButton;
+let menuContainer;
 
 /**
  * Places the menu button and (initially hidden) menu container
@@ -133,6 +136,9 @@ const menuContainer = createMenuContainer();
  * of the elements are styled.
  */
 function createSettingsMenu() {
+  menuButton = createMenuButton();
+  menuContainer = createMenuContainer();
+
   document.body.prepend(menuContainer);
   document.body.prepend(menuButton);
 }
